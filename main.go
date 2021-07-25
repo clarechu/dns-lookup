@@ -9,12 +9,13 @@ import (
 
 func main() {
 	url := os.Args[1]
+	fmt.Printf("Address: ")
 	cname(url)
 	ip(url)
-	mx(url)
-	ns(url)
-	txt(url)
-	txt("_dmarc." + url)
+	//mx(url)
+	//ns(url)
+	//txt(url)
+	//txt("_dmarc." + url)
 }
 
 func cname(url string) {
@@ -22,7 +23,7 @@ func cname(url string) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("\n[CNAME] %s\n", cname)
+	fmt.Printf("\nCNAME: %s\n", cname)
 }
 
 func ip(url string) {
@@ -35,7 +36,7 @@ func ip(url string) {
 	}
 	fmt.Println()
 	for _, ip := range ips {
-		fmt.Printf("[IP] %s\n\n", ip)
+		fmt.Printf("Address: %s\n\n", ip)
 	}
 }
 
@@ -46,7 +47,7 @@ func mx(url string) {
 	}
 
 	for _, mx := range mxs {
-		fmt.Printf("[MX] %s %v\n", mx.Host, mx.Pref)
+		fmt.Printf("MX: %s %v\n", mx.Host, mx.Pref)
 	}
 }
 
@@ -60,7 +61,7 @@ func ns(url string) {
 	}
 	fmt.Println()
 	for _, ns := range nss {
-		fmt.Printf("[NS] %s\n", ns.Host)
+		fmt.Printf("NS: %s\n", ns.Host)
 	}
 }
 
@@ -75,9 +76,9 @@ func txt(url string) {
 	fmt.Println()
 	for _, txt := range txts {
 		if strings.Contains(txt, "v=DMARC1") {
-			fmt.Printf("[DMARC] %s\n", txt)
+			fmt.Printf("DMARC: %s\n", txt)
 			break
 		}
-		fmt.Printf("[TXT] %s\n", txt)
+		fmt.Printf("TXT: %s\n", txt)
 	}
 }
